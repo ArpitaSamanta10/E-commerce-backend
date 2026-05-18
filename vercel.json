@@ -13,6 +13,7 @@
     }
   ],
   "env": {
-    "NODE_ENV": "production"
+    "NODE_ENV": "production",
+    "CORS_ORIGINS": "https://e-commerce-frontend-nine-snowy.vercel.app,https://your-frontend-domain.vercel.app"
   }
 }
