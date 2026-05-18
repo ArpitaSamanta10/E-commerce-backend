@@ -69,21 +69,21 @@ async function createOrder(req, res, next) {
       total ?? Math.max(0, subtotal - appliedDiscount + finalShipping + tax);
 
     const deliveryDate = estimateDeliveryDate();
-    const shippingPayload = {
-      ...(shipping || {}),
-      shippingCost: finalShipping,
-      discount: appliedDiscount,
-      couponCode: couponCode || null,
-      estimatedDelivery: deliveryDate,
-      tax,
-      subtotal,
-    };
 
     const orderPayload = {
       user_id: req.user.id,
-      total: computedTotal,
-      shipping: shippingPayload,
-      status: 'pending',
+      full_name: req.body.full_name || '',
+      email: req.body.email || '',
+      phone: req.body.phone || '',
+      address: req.body.address || '',
+      city: req.body.city || '',
+      state: req.body.state || '',
+      country: req.body.country || '',
+      pincode: req.body.pincode || '',
+      total_amount: computedTotal,
+      payment_method: req.body.payment_method || 'card',
+      payment_status: 'pending',
+      order_status: 'processing',
     };
 
     const { data: order, error: orderError } = await supabase
